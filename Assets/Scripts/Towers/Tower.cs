@@ -111,9 +111,8 @@ public class Tower : MonoBehaviour
             }
             else if (isInRange(target))
             {
-                if (counter >= reelInRate * 100)
+                if (counter >= reelInRate * 80)
                 {
-                    Debug.Log(target.reeledInAmount);
                     target.reelIn(1);
                     counter = 0;
                 }

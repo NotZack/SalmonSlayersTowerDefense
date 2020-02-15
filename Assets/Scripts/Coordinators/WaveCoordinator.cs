@@ -34,7 +34,7 @@ public class WaveCoordinator : MonoBehaviour
     {
         counter++;
 
-        if (counter >= 1)
+        if (counter >= (60 + UnityEngine.Random.Range(-4.5f, 5f)))
         {
             fishList.Add(Instantiate(Resources.Load("Clownfish") as GameObject).GetComponent<Clownfish>());
             counter = 0;
