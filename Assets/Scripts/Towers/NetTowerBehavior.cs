@@ -11,7 +11,7 @@ public class NetTowerBehavior : Tower
         range = 2;
 
         cost = Tower.netTowerBaseCost;
-        maxUpgradeTier = 2;
+        maxUpgradeTier = 5;
         nextUpgradeCost = 700;
         cooldownTimer = (float) reelInRate;
     }

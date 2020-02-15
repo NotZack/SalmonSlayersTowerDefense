@@ -11,7 +11,7 @@ public class SpearTowerBehavior : Tower
         range = 2;
 
         cost = Tower.spearTowerBaseCost;
-        maxUpgradeTier = 2;
+        maxUpgradeTier = 3;
         nextUpgradeCost = 600;
 
         cooldownTimer = (float)reelInRate;

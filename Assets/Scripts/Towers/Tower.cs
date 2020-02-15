@@ -24,6 +24,7 @@ public class Tower : MonoBehaviour
     internal virtual void Start()
     {
         GameCoordinator.changeGoldBalance(-cost);
+        cooldownTimer = (float) reelInRate;
     }
 
     internal void commonStart()
@@ -92,7 +93,20 @@ public class Tower : MonoBehaviour
     {
         if (placed)
         {
-            // Get the fish
+            if (target != null)
+            {
+                target = getNewestTarget();
+            }
+            else
+            {
+                cooldownTimer -= Time.deltaTime;
+                if (cooldownTimer <= 0)
+                {
+                    cooldownTimer = (float) reelInRate;
+                    //target.reelIn(1);
+                    Debug.Log("Here" + cooldownTimer.ToString());
+                }
+            }
         }
         else
         {
