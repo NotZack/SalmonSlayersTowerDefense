@@ -55,9 +55,6 @@ public class FollowThePath : MonoBehaviour
         
         }
 
-        else if (waypointIndex == waypoints.Length)
-        {
-            PanelEscaped.EscapedFish(this);
-        }
+        
     }
 }

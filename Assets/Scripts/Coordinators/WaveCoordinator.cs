@@ -6,21 +6,26 @@ public class WaveCoordinator : MonoBehaviour
 {
     static int waveNumber = 1;
 
-    static List<CommonFish> fishList = new List<CommonFish>();
+    static List<GameObject> fishList = new List<GameObject>();
 
     internal static int getWaveNumber()
     {
         return waveNumber;
     }
 
-    internal static List<CommonFish> getFishList()
+    internal static List<GameObject> getFishList()
     {
         return fishList;
     }
 
     void Start()
     {
-        
+        if (waveNumber == 1)
+        {
+            fishList.Add(
+                (GameObject)Instantiate(Resources.Load("Clownfish"))
+            );
+        }
     }
 
     void Update()

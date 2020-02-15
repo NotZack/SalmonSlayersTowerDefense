@@ -28,5 +28,10 @@ public abstract class CommonFish : MonoBehaviour
     {}
 
     internal virtual void Update()
-    {}
+    { }
+
+    else if (waypointIndex == waypoints.Length)
+        {
+            PanelEscaped.EscapedFish(this);
+    }
 }
