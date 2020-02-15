@@ -93,7 +93,7 @@ public class Tower : MonoBehaviour
     {
         if (placed)
         {
-            if (target != null)
+            if (target == null)
             {
                 target = getNewestTarget();
             }
@@ -103,7 +103,7 @@ public class Tower : MonoBehaviour
                 if (cooldownTimer <= 0)
                 {
                     cooldownTimer = (float) reelInRate;
-                    //target.reelIn(1);
+                    target.reelIn(1);
                     Debug.Log("Here" + cooldownTimer.ToString());
                 }
             }

@@ -6,6 +6,8 @@ using UnityEngine;
 public class StreamCoordinator : MonoBehaviour
 {
 
+    List<Vector2> streamLocations = new List<Vector2>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +15,7 @@ public class StreamCoordinator : MonoBehaviour
 
         BoundsInt bounds = tilemap.cellBounds;
         TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
-        List<Vector2> streamLocations = new List<Vector2>();
+        
 
         for (int x = 0; x < bounds.size.x; x++)
         {
@@ -26,6 +28,11 @@ public class StreamCoordinator : MonoBehaviour
                 }
             }
         }
+    }
+
+    List<Vector2> getStreamLocations()
+    {
+        return streamLocations;
     }
 
     // Update is called once per frame
