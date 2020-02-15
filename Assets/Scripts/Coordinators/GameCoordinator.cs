@@ -3,7 +3,6 @@
 public class GameCoordinator : MonoBehaviour
 {
 
-    static int waveNumber = 1;
     static int currentSortingLayer = 1;
     static int goldBalance = 1000;
 
@@ -13,10 +12,6 @@ public class GameCoordinator : MonoBehaviour
 
     void Update() {}
 
-    internal static int getWaveNumber()
-    {
-        return waveNumber;
-    }
     internal static int incrementSortingOrder()
     {
         currentSortingLayer++;

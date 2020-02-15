@@ -16,7 +16,7 @@ public class UpdateWaveCounter : MonoBehaviour
 
     internal void updateWaveText()
     {
-        string waveNum = GameCoordinator.getWaveNumber().ToString();
+        string waveNum = WaveCoordinator.getWaveNumber().ToString();
         waveText.text = "Wave: " + waveNum;
     }
     void Update()

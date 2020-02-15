@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class Tower : MonoBehaviour
+public class Tower : MonoBehaviour
 {
     internal const int netTowerBaseCost = 300;
     internal const int spearTowerBaseCost = 500;
@@ -8,6 +8,7 @@ public abstract class Tower : MonoBehaviour
     //Stat variables
     internal int range;
     internal int cost;
+    internal double reelInRate;
 
     internal int nextUpgradeCost;
     internal int currentTier;
@@ -16,15 +17,37 @@ public abstract class Tower : MonoBehaviour
     //Behavioral variables
     internal bool placed = false;
     internal bool colliding = false;
+    internal float cooldownTimer = 0;
+
+    internal CommonFish target = null;
+
+    internal virtual void Start()
+    {
+        GameCoordinator.changeGoldBalance(-cost);
+    }
 
     internal void commonStart()
     {
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         sprite.sortingOrder = GameCoordinator.incrementSortingOrder();
+        currentTier = 1;
     }
-
-    internal abstract bool isUpgradable();
-    internal abstract void upgrade();
+    internal bool isUpgradable()
+    {
+        return currentTier < maxUpgradeTier;
+    }
+    internal void upgrade()
+    {
+        if (isUpgradable())
+        {
+            GameCoordinator.changeGoldBalance(-nextUpgradeCost);
+            currentTier++;
+            cost = nextUpgradeCost;
+            nextUpgradeCost *= 2;
+            UpgradeScript.refreshButton();
+            UpgradeCostUpdate.updateCost();
+        }
+    }
 
     internal void sellTower()
     {
@@ -38,6 +61,23 @@ public abstract class Tower : MonoBehaviour
     {
         placed = false;
     }
+
+    internal CommonFish getNewestTarget()
+    {
+        CommonFish closest = null;
+        Vector2 currentPos = transform.position;
+
+        foreach (CommonFish fish in WaveCoordinator.getFishList())
+        {
+            float dist = Vector2.Distance(fish.transform.position, currentPos);
+            if (dist < range)
+            {
+                closest = fish;
+            }
+        }
+        return closest;
+    }
+
     void OnMouseDown()
     {
         if (placed)
@@ -48,13 +88,32 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
-    void Start()
+    internal virtual void Update()
     {
-        
-    }
+        if (placed)
+        {
+            // Get the fish
+        }
+        else
+        {
+            if (!Input.GetMouseButtonDown(0))
+            {
+                Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                transform.position = (pos);
+            }
+            else
+            {
+                if (!colliding)
+                {
+                    placed = true;
+                    GetComponent<Collider2D>().isTrigger = false;
+                }
+                else
+                {
+                    //Debug.Log("COLLIDING WITH STREAM");
+                }
 
-    void Update()
-    {
-        
+            }
+        }
     }
 }

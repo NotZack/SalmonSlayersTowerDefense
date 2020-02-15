@@ -6,59 +6,24 @@ public class SpearTowerBehavior : Tower
     private void Awake()
     {
         commonStart();
-        cost = Tower.spearTowerBaseCost;
+        
+        reelInRate = 0.5;
         range = 2;
-        currentTier = 1;
+
+        cost = Tower.spearTowerBaseCost;
         maxUpgradeTier = 2;
         nextUpgradeCost = 600;
-    }
-    void Start(){
-        GameCoordinator.changeGoldBalance(-cost);
+
+        cooldownTimer = (float)reelInRate;
     }
 
-    void Update()
-    {
-        if (placed)
-        {
-            // Get the fish
-        }
-        else
-        {
-            if (!Input.GetMouseButtonDown(0))
-            {
-                Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                transform.position = (pos);
-            }
-            else
-            {
-                if (!colliding)
-                {
-                    placed = true;
-                    GetComponent<Collider2D>().isTrigger = false;
-                }
-                else
-                {
-                    //Debug.Log("COLLIDING WITH STREAM");
-                }
-                
-            }
-        }
+    internal override void Start(){
+        base.Start();
     }
-    internal override bool isUpgradable()
+
+    internal override void Update()
     {
-        return currentTier < maxUpgradeTier;
-    }
-    internal override void upgrade()
-    {
-        if (isUpgradable())
-        {
-            GameCoordinator.changeGoldBalance(-nextUpgradeCost);
-            currentTier++;
-            cost = nextUpgradeCost;
-            nextUpgradeCost *= 2;
-            UpgradeScript.refreshButton();
-            UpgradeCostUpdate.updateCost();
-        }
+        base.Update();
     }
 
     void OnTriggerEnter2D(Collider2D other)
