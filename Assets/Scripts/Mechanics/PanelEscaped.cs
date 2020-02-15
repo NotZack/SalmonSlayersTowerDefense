@@ -12,6 +12,7 @@ public class PanelEscaped : MonoBehaviour
     void Start()
     {
         Escaped = GetComponent<Text>();
+        Debug.Log(Escaped);
 
     }
     //A method that is called in FollowThePath.cs which takes in the parameter of the type of fish in every instance.
@@ -21,6 +22,7 @@ public class PanelEscaped : MonoBehaviour
         string fishEsc = crossedFish.weight.ToString();
         //Updates the escaped text to include the weight of the fish.
         Escaped.text = "Escaped: " + fishEsc;
+        Debug.Log(Escaped.text);
     }
 
     // Update is called once per frame
