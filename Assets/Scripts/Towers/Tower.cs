@@ -2,6 +2,8 @@
 
 public abstract class Tower : MonoBehaviour
 {
+    internal const int netTowerBaseCost = 300;
+    internal const int spearTowerBaseCost = 500;
 
     //Stat variables
     internal int range;
@@ -29,7 +31,7 @@ public abstract class Tower : MonoBehaviour
         Destroy(this.gameObject);
         GameCoordinator.selectedTower = null;
         MenuCoordinator.switchMenu(false);
-        GameCoordinator.increaseGoldBalance(cost / 2);
+        GameCoordinator.changeGoldBalance(cost / 2);
     }
 
     internal void moveTower()
@@ -41,6 +43,7 @@ public abstract class Tower : MonoBehaviour
         if (placed)
         {
             GameCoordinator.setSelectedTower(this);
+            UpgradeCostUpdate.updateCost();
             MenuCoordinator.switchMenu(false);
         }
     }

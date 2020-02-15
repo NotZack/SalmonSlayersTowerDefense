@@ -6,14 +6,16 @@ public class NetTowerBehavior : Tower
     private void Awake()
     {
         commonStart();
-        cost = 300;
+        cost = Tower.netTowerBaseCost;
         range = 2;
         currentTier = 1;
-        maxUpgradeTier = 1;
+        maxUpgradeTier = 2;
         nextUpgradeCost = 700;
     }
 
-    void Start(){}
+    void Start(){
+        GameCoordinator.changeGoldBalance(-cost);
+    }
 
     void Update()
     {
@@ -52,9 +54,12 @@ public class NetTowerBehavior : Tower
     {
         if (isUpgradable())
         {
+            GameCoordinator.changeGoldBalance(-nextUpgradeCost);
             currentTier++;
             cost = nextUpgradeCost;
             nextUpgradeCost *= 2;
+            UpgradeScript.refreshButton();
+            UpgradeCostUpdate.updateCost();
         }
     }
 

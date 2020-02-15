@@ -3,6 +3,7 @@
 public class GameCoordinator : MonoBehaviour
 {
 
+    static int waveNumber = 1;
     static int currentSortingLayer = 1;
     static int goldBalance = 1000;
 
@@ -12,6 +13,10 @@ public class GameCoordinator : MonoBehaviour
 
     void Update() {}
 
+    internal static int getWaveNumber()
+    {
+        return waveNumber;
+    }
     internal static int incrementSortingOrder()
     {
         currentSortingLayer++;
@@ -28,6 +33,11 @@ public class GameCoordinator : MonoBehaviour
         return selectedTower;
     }
 
+    public void upgradeSelectedTower()
+    {
+        selectedTower.upgrade();
+    }
+
     public void sellSelectedTower()
     {
         selectedTower.sellTower();
@@ -38,7 +48,7 @@ public class GameCoordinator : MonoBehaviour
         selectedTower.moveTower();
     }
 
-    internal static void increaseGoldBalance(int amount)
+    internal static void changeGoldBalance(int amount)
     {
         goldBalance += amount;
     }

@@ -6,13 +6,15 @@ public class SpearTowerBehavior : Tower
     private void Awake()
     {
         commonStart();
-        cost = 500;
+        cost = Tower.spearTowerBaseCost;
         range = 2;
         currentTier = 1;
         maxUpgradeTier = 2;
         nextUpgradeCost = 600;
     }
-    void Start(){}
+    void Start(){
+        GameCoordinator.changeGoldBalance(-cost);
+    }
 
     void Update()
     {
@@ -50,9 +52,12 @@ public class SpearTowerBehavior : Tower
     {
         if (isUpgradable())
         {
+            GameCoordinator.changeGoldBalance(-nextUpgradeCost);
             currentTier++;
             cost = nextUpgradeCost;
             nextUpgradeCost *= 2;
+            UpgradeScript.refreshButton();
+            UpgradeCostUpdate.updateCost();
         }
     }
 

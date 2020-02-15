@@ -21,6 +21,8 @@ public class MenuCoordinator : MonoBehaviour
         {
             buildMenu.SetActive(false);
             towerMenu.SetActive(true);
+            UpgradeCostUpdate.updateCost();
+            UpgradeScript.refreshButton();
         }
         else
         {
