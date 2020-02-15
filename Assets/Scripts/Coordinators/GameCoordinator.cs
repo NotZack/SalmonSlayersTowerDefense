@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,5 +15,17 @@ public class GameCoordinator : MonoBehaviour
     void Update()
     {
         
+    }
+
+    internal static GameObject createSpearTower()
+    {
+        GameObject spearTower = (GameObject)Instantiate(Resources.Load("SpearTower"));
+        return spearTower;
+    }
+
+    internal static GameObject createNetTower()
+    {
+        GameObject netTower = (GameObject)Instantiate(Resources.Load("NetTower"));
+        return netTower;
     }
 }
