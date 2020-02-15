@@ -63,12 +63,12 @@ public class Tower : MonoBehaviour
         placed = false;
     }
 
-    internal CommonFish getNewestTarget()
+    internal GameObject getNewestTarget()
     {
-        CommonFish closest = null;
+        GameObject closest = null;
         Vector2 currentPos = transform.position;
 
-        foreach (CommonFish fish in WaveCoordinator.getFishList())
+        foreach (GameObject fish in WaveCoordinator.getFishList())
         {
             float dist = Vector2.Distance(fish.transform.position, currentPos);
             if (dist < range)
@@ -96,7 +96,7 @@ public class Tower : MonoBehaviour
             if (target == null)
             {
                 Debug.Log(Time.deltaTime.ToString());
-                target = getNewestTarget();
+                //target = getNewestTarget();
             }
             else
             {

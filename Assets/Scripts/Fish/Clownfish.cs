@@ -4,7 +4,7 @@ public class Clownfish : CommonFish
 {
     void Awake()
     {
-        movementSpeed = 15;
+        movementSpeed = 5;
         weight = 2;
         inAir = false;
         inWater = true;
