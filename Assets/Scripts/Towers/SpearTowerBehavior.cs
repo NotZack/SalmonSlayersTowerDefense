@@ -7,14 +7,12 @@ public class SpearTowerBehavior : Tower
     {
         commonStart();
         
-        reelInRate = 0.5;
+        reelInRate = 2;
         range = 2;
 
         cost = Tower.spearTowerBaseCost;
         maxUpgradeTier = 3;
         nextUpgradeCost = 600;
-
-        cooldownTimer = (float)reelInRate;
     }
 
     internal override void Start(){

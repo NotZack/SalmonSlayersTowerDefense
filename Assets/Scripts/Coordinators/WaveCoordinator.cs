@@ -6,14 +6,14 @@ public class WaveCoordinator : MonoBehaviour
 {
     static int waveNumber = 1;
 
-    static List<GameObject> fishList = new List<GameObject>();
+    static List<CommonFish> fishList = new List<CommonFish>();
 
     internal static int getWaveNumber()
     {
         return waveNumber;
     }
 
-    internal static List<GameObject> getFishList()
+    internal static List<CommonFish> getFishList()
     {
         return fishList;
     }
@@ -22,14 +22,22 @@ public class WaveCoordinator : MonoBehaviour
     {
         if (waveNumber == 1)
         {
-            fishList.Add(
-                (GameObject)Instantiate(Resources.Load("Clownfish"))
-            );
+            fishList.Add(Instantiate(Resources.Load("Clownfish") as GameObject).GetComponent<Clownfish>());
+            
+
         }
     }
 
+    int counter = 0;
+
     void Update()
     {
-        
+        counter++;
+
+        if (counter >= 1)
+        {
+            fishList.Add(Instantiate(Resources.Load("Clownfish") as GameObject).GetComponent<Clownfish>());
+            counter = 0;
+        }
     }
 }

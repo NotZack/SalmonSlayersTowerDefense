@@ -27,7 +27,7 @@ public abstract class CommonFish : MonoBehaviour
 
     void getCaught()
     {
-
+        Destroy(this.gameObject);
     }
 
     internal virtual void Start()
