@@ -24,6 +24,18 @@ public abstract class Tower : MonoBehaviour
     internal abstract bool isUpgradable();
     internal abstract void upgrade();
 
+    internal void sellTower()
+    {
+        Destroy(this.gameObject);
+        GameCoordinator.selectedTower = null;
+        MenuCoordinator.switchMenu(false);
+        GameCoordinator.increaseGoldBalance(cost / 2);
+    }
+
+    internal void moveTower()
+    {
+        placed = false;
+    }
     void OnMouseDown()
     {
         if (placed)

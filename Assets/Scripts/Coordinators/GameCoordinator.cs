@@ -4,8 +4,9 @@ public class GameCoordinator : MonoBehaviour
 {
 
     static int currentSortingLayer = 1;
+    static int goldBalance = 1000;
 
-    static Tower selectedTower = null;
+    internal static Tower selectedTower = null;
     
     void Start() {}
 
@@ -25,6 +26,26 @@ public class GameCoordinator : MonoBehaviour
     internal static Tower getSelectedTower()
     {
         return selectedTower;
+    }
+
+    public void sellSelectedTower()
+    {
+        selectedTower.sellTower();
+    }
+
+    public void moveSelectedTower()
+    {
+        selectedTower.moveTower();
+    }
+
+    internal static void increaseGoldBalance(int amount)
+    {
+        goldBalance += amount;
+    }
+
+    internal static int getGoldBalance()
+    {
+        return goldBalance;
     }
 
     internal static GameObject createSpearTower()
