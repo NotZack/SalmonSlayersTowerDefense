@@ -95,6 +95,7 @@ public class Tower : MonoBehaviour
         {
             if (target == null)
             {
+                Debug.Log(Time.deltaTime.ToString());
                 target = getNewestTarget();
             }
             else
@@ -104,7 +105,7 @@ public class Tower : MonoBehaviour
                 {
                     cooldownTimer = (float) reelInRate;
                     target.reelIn(1);
-                    Debug.Log("Here" + cooldownTimer.ToString());
+                    Debug.Log("Here" + target);
                 }
             }
         }

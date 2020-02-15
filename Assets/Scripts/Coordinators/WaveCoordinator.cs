@@ -20,7 +20,10 @@ public class WaveCoordinator : MonoBehaviour
 
     void Start()
     {
-        
+        if (waveNumber == 1)
+        {
+            GameObject netTower = (GameObject)Instantiate(Resources.Load("Clownfish"));
+        }
     }
 
     void Update()

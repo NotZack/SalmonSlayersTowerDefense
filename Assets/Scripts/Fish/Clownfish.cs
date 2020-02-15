@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Goldfish : CommonFish
+public class Clownfish : CommonFish
 {
     void Awake()
     {
