@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8282655885553903804}
   - component: {fileID: 8282655885553903805}
   - component: {fileID: 61404101027278956}
-  - component: {fileID: 50291307166111864}
+  - component: {fileID: 50437123669385354}
   m_Layer: 0
   m_Name: SpearTower
   m_TagString: Untagged
@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1362be605282a354aabbab0c69e8ccda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radiusDisplay: {fileID: 8651727847726804161, guid: 047cfb2e0120980438a18db3906f50ab,
+    type: 3}
 --- !u!61 &61404101027278956
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -118,9 +120,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.75}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
---- !u!50 &50291307166111864
+--- !u!50 &50437123669385354
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -140,4 +142,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

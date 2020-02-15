@@ -1,19 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class NetTowerBehavior : MonoBehaviour
+public class NetTowerBehavior : TowerBehavior
 {
-    bool placed = false;
-    bool colliding = false;
+    void Start(){ commonStart();}
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (placed)
@@ -32,6 +22,7 @@ public class NetTowerBehavior : MonoBehaviour
                 if (!colliding)
                 {
                     placed = true;
+                    GetComponent<Collider2D>().isTrigger = false;
                 }
                 else
                 {
@@ -41,7 +32,6 @@ public class NetTowerBehavior : MonoBehaviour
             }
         }
     }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         colliding = true;
