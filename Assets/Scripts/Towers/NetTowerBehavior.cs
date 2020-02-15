@@ -1,8 +1,19 @@
 ﻿using UnityEngine;
 
-public class NetTowerBehavior : TowerBehavior
+public class NetTowerBehavior : Tower
 {
-    void Start(){ commonStart();}
+
+    private void Awake()
+    {
+        commonStart();
+        cost = 300;
+        range = 2;
+        currentTier = 1;
+        maxUpgradeTier = 1;
+        nextUpgradeCost = 700;
+    }
+
+    void Start(){}
 
     void Update()
     {
@@ -32,6 +43,21 @@ public class NetTowerBehavior : TowerBehavior
             }
         }
     }
+
+    internal override bool isUpgradable()
+    {
+        return currentTier < maxUpgradeTier;
+    }
+    internal override void upgrade()
+    {
+        if (isUpgradable())
+        {
+            currentTier++;
+            cost = nextUpgradeCost;
+            nextUpgradeCost *= 2;
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         colliding = true;

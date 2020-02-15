@@ -1,8 +1,17 @@
 ﻿using UnityEngine;
 
-public abstract class TowerBehavior : MonoBehaviour
+public abstract class Tower : MonoBehaviour
 {
 
+    //Stat variables
+    internal int range;
+    internal int cost;
+
+    internal int nextUpgradeCost;
+    internal int currentTier;
+    internal int maxUpgradeTier;
+
+    //Behavioral variables
     internal bool placed = false;
     internal bool colliding = false;
 
@@ -12,10 +21,14 @@ public abstract class TowerBehavior : MonoBehaviour
         sprite.sortingOrder = GameCoordinator.incrementSortingOrder();
     }
 
+    internal abstract bool isUpgradable();
+    internal abstract void upgrade();
+
     void OnMouseDown()
     {
         if (placed)
         {
+            GameCoordinator.setSelectedTower(this);
             MenuCoordinator.switchMenu(false);
         }
     }

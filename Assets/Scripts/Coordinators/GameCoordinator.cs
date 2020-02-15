@@ -4,6 +4,8 @@ public class GameCoordinator : MonoBehaviour
 {
 
     static int currentSortingLayer = 1;
+
+    static Tower selectedTower = null;
     
     void Start() {}
 
@@ -13,6 +15,16 @@ public class GameCoordinator : MonoBehaviour
     {
         currentSortingLayer++;
         return currentSortingLayer;
+    }
+
+    internal static void setSelectedTower(Tower tower)
+    {
+        selectedTower = tower;
+    }
+
+    internal static Tower getSelectedTower()
+    {
+        return selectedTower;
     }
 
     internal static GameObject createSpearTower()
