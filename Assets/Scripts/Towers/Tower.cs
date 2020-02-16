@@ -31,7 +31,9 @@ public class Tower : MonoBehaviour
         line.positionCount = 2;
         line.sortingOrder = 1;
         line.material = new Material(Shader.Find("Sprites/Default"));
-        line.material.color = Color.red;
+        //line.material.color = Color.red;
+        line.SetPosition(0, this.transform.position);
+        line.SetPosition(1, this.transform.position);
     }
 
     internal void commonStart()
@@ -117,6 +119,7 @@ public class Tower : MonoBehaviour
             if (target == null)
             {
                 target = getNewestTarget();
+                line.SetPosition(0, this.transform.position);
                 line.SetPosition(1, this.transform.position);
             }
             else if (isInRange(target))

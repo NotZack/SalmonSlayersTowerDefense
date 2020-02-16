@@ -21,6 +21,6 @@ public class UpdateWaveCounter : MonoBehaviour
     }
     void Update()
     {
-        
+        updateWaveText();
     }
 }

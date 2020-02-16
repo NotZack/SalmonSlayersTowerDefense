@@ -14,6 +14,9 @@ public class NetTowerButtonPress : MonoBehaviour
 
     public void ButtonInteract()
     {
-        GameCoordinator.createNetTower();
+        if (GameCoordinator.getGoldBalance() >= Tower.netTowerBaseCost)
+        {
+            GameCoordinator.createNetTower();
+        }
     }
 }

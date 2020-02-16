@@ -40,7 +40,9 @@ public abstract class CommonFish : MonoBehaviour
 
     void getCaught()
     {
+        PanelCaught.updateCaughtText(this.weight);
         Destroy(this.gameObject);
+
         GameCoordinator.changeGoldBalance(this.reward);
     }
 

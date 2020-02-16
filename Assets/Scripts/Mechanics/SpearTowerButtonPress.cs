@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class SpearTowerButtonPress : MonoBehaviour
 {
@@ -15,6 +14,9 @@ public class SpearTowerButtonPress : MonoBehaviour
 
     public void ButtonInteract()
     {
-        GameCoordinator.createSpearTower();
+        if (GameCoordinator.getGoldBalance() >= Tower.spearTowerBaseCost)
+        {
+            GameCoordinator.createSpearTower();
+        } 
     }
 }

@@ -8,7 +8,7 @@ public class SpearTowerBehavior : Tower
         commonStart();
         
         reelInRate = 2;
-        range = 2;
+        range = 3;
 
         cost = Tower.spearTowerBaseCost;
         maxUpgradeTier = 3;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WaveCoordinator : MonoBehaviour
@@ -36,13 +37,12 @@ public class WaveCoordinator : MonoBehaviour
         
     }
 
-    //Input is arbitrary difficulty number 1-100, 1 being easiest 100 being hardest.
     List<CommonFish> createWave(int difficulty)
     {
         List<CommonFish> waveInhabitants = new List<CommonFish>();
         for (int i = 0; i < difficulty; i++)
         {
-            if (UnityEngine.Random.Range(0, 9) == 1)
+            if (UnityEngine.Random.Range(0, 20) == 1)
             {
                 waveInhabitants.Add((Resources.Load("Shark") as GameObject).GetComponent<Shark>());
             }
@@ -72,22 +72,18 @@ public class WaveCoordinator : MonoBehaviour
                 waveInhabitants.Add((Resources.Load("Salmon") as GameObject).GetComponent<Salmon>());
             }
         }
+        waveInhabitants = waveInhabitants.OrderBy(x => UnityEngine.Random.value).ToList();
         return waveInhabitants;
     }
 
     public void openWave()
     {
-        if (nextWave.Count == 0)
-        {
-            startWave = true;
-            Debug.Log("HERE");
-        }
+        startWave = true;
     }
 
     int counter = 0;
     void Update()
     {
-        counter++;
 
         if (startWave && nextWave.Count > 0)
         {
@@ -97,16 +93,18 @@ public class WaveCoordinator : MonoBehaviour
                 nextWave.RemoveAt(0);
                 counter = 0;
 
-                if (fishList.Count == 0)
+                if (nextWave.Count == 0)
                 {
                     waveNumber++;
+                    counter = 0;
                     startWave = false;
                 }
             }
+            counter++;
         } 
-        else
+        else if (nextWave.Count == 0)
         {
-            createWave(UnityEngine.Random.Range(1, 10) * waveNumber);
+           nextWave = createWave(UnityEngine.Random.Range(1, 10) * waveNumber);
         }
     }
 }
