@@ -9,6 +9,7 @@ public class Clownfish : CommonFish
         inAir = false;
         inWater = true;
         canBoth = false;
+        reward = 10;
     }
 
     internal override void Start()

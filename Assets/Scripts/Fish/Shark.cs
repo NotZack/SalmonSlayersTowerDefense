@@ -11,6 +11,7 @@ public class Shark : CommonFish
         inAir = false;
         inWater = true;
         canBoth = true;
+        reward = 500;
     }
 
     internal override void Start()
