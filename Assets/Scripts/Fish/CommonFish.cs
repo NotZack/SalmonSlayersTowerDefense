@@ -44,16 +44,8 @@ public abstract class CommonFish : MonoBehaviour
 
     internal static void createWaypoints()
     {
-<<<<<<< HEAD
-
-        rend = GetComponent<Renderer>();
-        for (int i = 0; i < 24; i ++)
-        {
-            if (i == 0)
-=======
         if (!(waypoints.Count > 0)) {
             for (int i = 0; i < 24; i++)
->>>>>>> 32680f5f906f36c62e48c145f0cd0856b66ab027
             {
                 if (i == 0)
                 {
