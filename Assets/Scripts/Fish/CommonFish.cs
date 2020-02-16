@@ -2,6 +2,7 @@
 using UnityEngine;
 public abstract class CommonFish : MonoBehaviour
 {
+    internal int reward;
     internal int movementSpeed;
     internal int weight;
     internal bool inAir;
@@ -40,6 +41,7 @@ public abstract class CommonFish : MonoBehaviour
     void getCaught()
     {
         Destroy(this.gameObject);
+        GameCoordinator.changeGoldBalance(this.reward);
     }
 
     internal static void createWaypoints()

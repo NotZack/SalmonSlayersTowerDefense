@@ -11,6 +11,8 @@ public class SwordFish : CommonFish
         inAir = true;
         inWater = true;
         canBoth = true;
+        reward = 100;
+
     }
 
     internal override void Start()

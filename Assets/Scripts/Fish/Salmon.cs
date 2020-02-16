@@ -12,6 +12,7 @@ public class Salmon : CommonFish
         inAir = false;
         inWater = true;
         canBoth = true;
+        reward = 50;
     }
 
     internal override void Start()

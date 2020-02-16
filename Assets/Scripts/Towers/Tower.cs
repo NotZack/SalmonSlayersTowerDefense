@@ -46,7 +46,7 @@ public class Tower : MonoBehaviour
     }
     internal void upgrade()
     {
-        if (isUpgradable())
+        if (isUpgradable() && nextUpgradeCost <= GameCoordinator.getGoldBalance() )
         {
             GameCoordinator.changeGoldBalance(-nextUpgradeCost);
             currentTier++;
