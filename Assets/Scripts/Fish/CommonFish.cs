@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
 public abstract class CommonFish : MonoBehaviour
 {
     internal int movementSpeed;
@@ -14,10 +13,10 @@ public abstract class CommonFish : MonoBehaviour
     bool colored = false;
 
     private Renderer rend;
-    private Color colorToTurnTo = Color.red;
+    private 
 
     //Movement variables
-    private List<Transform> waypoints = new List<Transform>();
+    static List<Transform> waypoints = new List<Transform>();
 
     private int waypointIndex = 0;
 
@@ -33,6 +32,7 @@ public abstract class CommonFish : MonoBehaviour
 
     void flashColor()
     {
+        Color colorToTurnTo = Color.red;
         rend.material.color = colorToTurnTo;
         colored = true;
     }
@@ -42,26 +42,48 @@ public abstract class CommonFish : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    internal virtual void Start()
+    internal static void createWaypoints()
     {
+<<<<<<< HEAD
 
         rend = GetComponent<Renderer>();
         for (int i = 0; i < 24; i ++)
         {
             if (i == 0)
+=======
+        if (!(waypoints.Count > 0)) {
+            for (int i = 0; i < 24; i++)
+>>>>>>> 32680f5f906f36c62e48c145f0cd0856b66ab027
             {
-                waypoints.Add(((GameObject)Instantiate(GameObject.Find("Waypoint"))).transform);
-            }
-            else
-            {
-                waypoints.Add(((GameObject)Instantiate(GameObject.Find("Waypoint" + " (" + i + ")"))).transform);
+                if (i == 0)
+                {
+                    waypoints.Add(((GameObject)Instantiate(GameObject.Find("Waypoint"))).transform);
+                }
+                else
+                {
+                    waypoints.Add(((GameObject)Instantiate(GameObject.Find("Waypoint" + " (" + i + ")"))).transform);
+                }
             }
         }
-        transform.position = waypoints[waypointIndex].transform.position;
     }
 
+    internal virtual void Start()
+    {
+        transform.position = waypoints[waypointIndex].transform.position;
+        rend = GetComponent<Renderer>();
+    }
+
+    int flashCounter = 0;
     internal virtual void Update()
     {
+        if (colored && (flashCounter > 25))
+        {
+            colored = false;
+            Color colorToTurnTo = Color.white;
+            rend.material.color = colorToTurnTo;
+            flashCounter = 0;
+        }
+        flashCounter++;
         if (waypointIndex <= waypoints.Count - 1)
         {
             // Move Enemy from current waypoint to the next one using MoveTowards method
