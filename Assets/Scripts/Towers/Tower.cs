@@ -17,14 +17,14 @@ public class Tower : MonoBehaviour
     //Behavioral variables
     internal bool placed = false;
     internal bool colliding = false;
-    internal float cooldownTimer = 0;
+
+    internal bool firstHit = false;
 
     internal CommonFish target = null;
 
     internal virtual void Start()
     {
         GameCoordinator.changeGoldBalance(-cost);
-        cooldownTimer = (float) reelInRate;
     }
 
     internal void commonStart()
@@ -63,20 +63,30 @@ public class Tower : MonoBehaviour
         placed = false;
     }
 
-    internal GameObject getNewestTarget()
+    internal CommonFish getNewestTarget()
     {
-        GameObject closest = null;
-        Vector2 currentPos = transform.position;
+        foreach (CommonFish fish in WaveCoordinator.getFishList())
+        {
+            if (isInRange(fish))
+            {
+                return fish;
+            }
+        }
+        return null;
+    }
 
-        foreach (GameObject fish in WaveCoordinator.getFishList())
+    internal bool isInRange(CommonFish fish)
+    {
+        Vector2 currentPos = transform.position;
+        if (fish != null)
         {
             float dist = Vector2.Distance(fish.transform.position, currentPos);
             if (dist < range)
             {
-                closest = fish;
+                return true;
             }
         }
-        return closest;
+        return false;
     }
 
     void OnMouseDown()
@@ -89,24 +99,29 @@ public class Tower : MonoBehaviour
         }
     }
 
+    int counter = 100;
+
     internal virtual void Update()
     {
         if (placed)
         {
             if (target == null)
             {
-                Debug.Log(Time.deltaTime.ToString());
-                //target = getNewestTarget();
+                target = getNewestTarget();
+            }
+            else if (isInRange(target))
+            {
+                if (counter >= reelInRate * 80)
+                {
+                    target.reelIn(1);
+                    counter = 0;
+                }
+                counter++;
             }
             else
             {
-                cooldownTimer -= Time.deltaTime;
-                if (cooldownTimer <= 0)
-                {
-                    cooldownTimer = (float) reelInRate;
-                    target.reelIn(1);
-                    Debug.Log("Here" + target);
-                }
+                target = null;
+                counter = 100;
             }
         }
         else

@@ -11,6 +11,11 @@ public abstract class CommonFish : MonoBehaviour
 
     internal int reeledInAmount;
 
+    bool colored = false;
+
+    private Renderer rend;
+    private Color colorToTurnTo = Color.red;
+
     //Movement variables
     private List<Transform> waypoints = new List<Transform>();
 
@@ -18,6 +23,7 @@ public abstract class CommonFish : MonoBehaviour
 
     internal void reelIn(int reelAmount)
     {
+        flashColor();
         reeledInAmount += reelAmount;
         if (reeledInAmount >= weight)
         {
@@ -25,14 +31,22 @@ public abstract class CommonFish : MonoBehaviour
         }
     }
 
+    void flashColor()
+    {
+        rend.material.color = colorToTurnTo;
+        colored = true;
+    }
+
     void getCaught()
     {
-
+        Destroy(this.gameObject);
     }
 
     internal virtual void Start()
     {
-        for (int i = 0; i < 24; i++)
+
+        rend = GetComponent<Renderer>();
+        for (int i = 0; i < 24; i ++)
         {
             if (i == 0)
             {
