@@ -8,7 +8,9 @@ public class GameCoordinator : MonoBehaviour
 
     internal static Tower selectedTower = null;
     
-    void Start() {}
+    void Start() {
+        CommonFish.createWaypoints();
+    }
 
     void Update() {}
 

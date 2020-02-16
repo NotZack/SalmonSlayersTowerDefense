@@ -21,10 +21,17 @@ public class Tower : MonoBehaviour
     internal bool firstHit = false;
 
     internal CommonFish target = null;
+    internal LineRenderer line;
 
     internal virtual void Start()
     {
         GameCoordinator.changeGoldBalance(-cost);
+        line = this.GetComponent<LineRenderer>();
+        line.startWidth = 0.1f;
+        line.positionCount = 2;
+        line.sortingOrder = 1;
+        line.material = new Material(Shader.Find("Sprites/Default"));
+        line.material.color = Color.red;
     }
 
     internal void commonStart()
@@ -45,6 +52,7 @@ public class Tower : MonoBehaviour
             currentTier++;
             cost = nextUpgradeCost;
             nextUpgradeCost *= 2;
+            reelInRate = reelInRate * 0.80;
             UpgradeScript.refreshButton();
             UpgradeCostUpdate.updateCost();
         }
@@ -105,18 +113,23 @@ public class Tower : MonoBehaviour
     {
         if (placed)
         {
+            counter++;
             if (target == null)
             {
                 target = getNewestTarget();
+                line.SetPosition(1, this.transform.position);
             }
             else if (isInRange(target))
             {
-                if (counter >= reelInRate * 80)
+
+                line.SetPosition(0, this.transform.position);
+                line.SetPosition(1, target.transform.position);
+
+                if (counter >= reelInRate * 70)
                 {
                     target.reelIn(1);
                     counter = 0;
                 }
-                counter++;
             }
             else
             {
@@ -131,18 +144,10 @@ public class Tower : MonoBehaviour
                 Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 transform.position = (pos);
             }
-            else
+            else if (!colliding)
             {
-                if (!colliding)
-                {
-                    placed = true;
-                    GetComponent<Collider2D>().isTrigger = false;
-                }
-                else
-                {
-                    //Debug.Log("COLLIDING WITH STREAM");
-                }
-
+                placed = true;
+                GetComponent<Collider2D>().isTrigger = false;
             }
         }
     }
