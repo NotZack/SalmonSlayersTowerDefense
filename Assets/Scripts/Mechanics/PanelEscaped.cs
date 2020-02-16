@@ -20,6 +20,7 @@ public class PanelEscaped : MonoBehaviour
         totalEsc += crossedFish.weight;
         //Updates the escaped text to include the weight of the fish.
         Escaped.text = "Escaped: " + totalEsc;
+        Destroy(crossedFish.gameObject);
     }
 
     // Update is called once per frame
